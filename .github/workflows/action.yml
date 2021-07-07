@@ -1,0 +1,11 @@
+name: Trying out github actions
+
+on:
+  pull_request:
+  
+ jobs:
+  simple_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Hello
+        run: echo 'Hello'
