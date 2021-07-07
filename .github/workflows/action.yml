@@ -1,8 +1,13 @@
 name: Trying out github actions
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
-    types: [ opened, reopened, closed ]
+    branches:
+      - main
+  
   
 jobs:
   simple_job:
