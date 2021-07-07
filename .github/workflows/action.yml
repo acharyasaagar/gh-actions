@@ -3,7 +3,7 @@ name: Trying out github actions
 on:
   pull_request:
   
- jobs:
+jobs:
   simple_job:
     runs-on: ubuntu-latest
     steps:
