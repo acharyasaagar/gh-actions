@@ -7,6 +7,8 @@ on:
 jobs:
   simple_job:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_CONTEXT: ${{ toJSON(github) }}
     steps:
-      - name: Print Hello
-        run: echo 'Hello'
+      - name: Print github context
+        run: echo $GGITHUB_CONTEXT
