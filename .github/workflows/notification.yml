@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: 8398a7/action-slack@v3
       with:
-        status: ${{ job.status }}
+        status: custom
         author_name: ${{ github.actor }}
         fields: workflow,job,commit,repo,ref,author,took
         custom_payload: |
