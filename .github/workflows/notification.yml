@@ -11,26 +11,12 @@ jobs:
   simple_job:
     runs-on: ubuntu-latest
     steps:
-    - name: Print contexts
-      env:
-        JOB: ${{ toJSON(job) }}
-        RUNNER:  ${{ toJSON(runner) }}
-        NEEDS:  ${{ toJSON(needs) }}
-        ENV:  ${{ toJSON(env) }}
-        STEPS:  ${{ toJSON(steps) }}
-      run: |
-        echo $JOB
-        echo $RUNNER
-        echo $NEEDS
-        echo $ENV
-        echo $STEPS
     - uses: 8398a7/action-slack@v3
       with:
         status: ${{ job.status }}
         author_name: ${{ github.actor }}
-        fields: all
-        mention: UGV4ETWDD
-        if_mention: failure,cancelled
+        text: 'something here'
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-      if: always() # Pick up events even if the job fails or is canceled.
+        MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      if: success() # Pick up events even if the job fails or is canceled.
