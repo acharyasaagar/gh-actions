@@ -15,7 +15,7 @@ jobs:
       with:
         status: ${{ job.status }}
         author_name: ${{ github.actor }}
-        text: ${{ github.actor + 'some concatenated text' }}
+        text: ${{ join(github.actor , 'some concatenated text', github.job) }}
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         MATRIX_CONTEXT: ${{ toJson(matrix) }}
