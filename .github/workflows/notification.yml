@@ -15,7 +15,13 @@ jobs:
       with:
         status: ${{ job.status }}
         author_name: ${{ github.actor }}
-        text: ${{ format( '{0} {1} {2}' , github.actor, 'some concatenated text', github.job ) }}
+        custom_payload: | 
+          {
+            attachments: [{
+             text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB}` 
+            }]
+          }
+        text: ${{ format( 'A new version {0} is deployed to {1} by {2} and the build took {3}' , github.sha, 'some concatenated text', github.job ) }}
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         MATRIX_CONTEXT: ${{ toJson(matrix) }}
