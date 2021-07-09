@@ -3,7 +3,7 @@ name: Health check
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '30 5,17 31 2 *'
 jobs:
   health_check:
     runs-on: ubuntu-20.04
