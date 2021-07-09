@@ -11,6 +11,8 @@ jobs:
   simple_job:
     runs-on: ubuntu-latest
     steps:
+    - name: Some failing job
+      run: some-failing-job # will return command not found
     - uses: 8398a7/action-slack@v3
       with:
         status: ${{ job.status }}
