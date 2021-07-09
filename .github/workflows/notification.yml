@@ -16,7 +16,7 @@ jobs:
         status: ${{ job.status }}
         author_name: incoming-webhook
         fields: all
-        mention: here
+        mention: UGV4ETWDD
         if_mention: failure,cancelled
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
