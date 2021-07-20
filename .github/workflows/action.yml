@@ -17,3 +17,5 @@ jobs:
     steps:
       - name: Print github context
         run: echo $GITHUB_CONTEXT
+      - name: Print all env variables
+        run: printenv
