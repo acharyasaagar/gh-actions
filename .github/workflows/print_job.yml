@@ -3,7 +3,7 @@ name: Trying out github actions
 on:
   push:
     branches:
-      - print-jobs
+      - main
   
 jobs:
   simple_job:
