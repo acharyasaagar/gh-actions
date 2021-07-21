@@ -1,0 +1,29 @@
+name: Slack notifications testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  simple_job:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: 8398a7/action-slack@v3
+      with:
+        status: custom
+        author_name: ${{ github.actor }}
+        fields: workflow,job,commit,repo,ref,author,took
+        custom_payload: |
+          {
+            attachments: [{
+              color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+              text: `A new versions is deployed to https://abc.com  ${process.env.AS_COMMIT} by ${process.env.AS_AUTHOR} and build took ${process.env.AS_TOOK}`,
+            }]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        MATRIX_CONTEXT: ${{ toJson(matrix) }}
+      if: success() # Pick up events even if the job fails or is canceled.
