@@ -8,6 +8,8 @@ on:
 jobs:
   simple_job:
     runs-on: ubuntu-latest
+    env:
+      COMMIT_MESSAGE: ${{ toJSON(github.event.commits.*.message) }}
     steps:
       - name: This should run only when ref branch is print-jobs and event is push
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/print-jobs' }}
@@ -21,3 +23,5 @@ jobs:
       - name: Should run if any of commit message contains "#skip" text in it
         if: ${{ contains(toJSON(github.event.commits.*.message), '#skip') }}
         run: echo 'Contains "#skip"'
+      - name: Print commit messages
+        run: echo $COMMIT_MESSAGE
