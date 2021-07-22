@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_CONTEXT: ${{ toJSON(github) }}
+      COMMIT_MESSAGE: ${{ toJSON(github.event.commits.*.message) }}
     steps:
       - name: Print github context
         run: echo $GITHUB_CONTEXT
@@ -21,3 +22,7 @@ jobs:
       - name: This should run only when ref branch is print-jobs and event is pull request
         if: ${{ github.event_name == 'pull_request' && github.ref == 'refs/heads/print-jobs' }}
         run: echo 'Event is pull request and ref is print-jobs'
+      - name: Print commit message
+        run: echo $COMMIT_MESSAGE
+      - name: Hello
+        run: echo Hello
