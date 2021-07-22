@@ -18,3 +18,6 @@ jobs:
       - name: Should skip if any of commit message contains "#skip" text in it
         if: ${{ !contains(toJSON(github.event.commits.*.message), '#skip') }}
         run: echo 'Does not contain "#skip"'
+      - name: Should run if any of commit message contains "#skip" text in it
+        if: ${{ contains(toJSON(github.event.commits.*.message), '#skip') }}
+        run: echo 'Contains "#skip"'
