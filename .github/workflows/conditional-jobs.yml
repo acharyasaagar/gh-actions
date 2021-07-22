@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       COMMIT_MESSAGE: ${{ toJSON(github.event.commits.*.message) }}
+      CONTAINS_SKIP: ${{ contains(toJSON(github.event.commits.*.message), '#skip')  }}
     steps:
       - name: This should run only when ref branch is print-jobs and event is push
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/print-jobs' }}
@@ -25,3 +26,5 @@ jobs:
         run: echo 'Contains "#skip"'
       - name: Print commit messages
         run: echo $COMMIT_MESSAGE
+      - name: Print CONTAINS_SKIP
+        run: echo $CONTAINS_SKIP
