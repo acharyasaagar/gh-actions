@@ -24,3 +24,5 @@ jobs:
         run: echo 'Event is pull request and ref is print-jobs'
       - name: Print commit message
         run: echo $COMMIT_MESSAGE
+      - name: Hello
+        run: echo Hello
