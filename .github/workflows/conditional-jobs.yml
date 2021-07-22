@@ -1,0 +1,19 @@
+name: Conditional jobs
+
+on:
+  push:
+    branches:
+      - main
+  
+jobs:
+  simple_job:
+    runs-on: ubuntu-latest
+      - name: This should run only when ref branch is print-jobs and event is push
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/print-jobs' }}
+        run: echo 'Event is push and ref is print-jobs'
+      - name: This should run only when ref branch is print-jobs and event is pull request
+        if: ${{ github.event_name == 'pull_request' && github.ref == 'refs/heads/print-jobs' }}
+        run: echo 'Event is pull request and ref is print-jobs'
+      - name: Should skip if any of commit message contains "#skip" text in it
+        if: ${{ !contains(toJSON(github.event.commits.*.message), '#skip') }}
+        run: echo 'Does not contain "#skip"'
