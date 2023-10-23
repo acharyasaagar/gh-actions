@@ -3,7 +3,7 @@ name: Automation for release
 on:
   push:
     branches:
-      - '*release*'
+      - 'release/*'
 
 jobs:
   bump_version:
